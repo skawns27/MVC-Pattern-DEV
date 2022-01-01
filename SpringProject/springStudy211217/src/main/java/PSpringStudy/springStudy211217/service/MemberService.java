@@ -3,14 +3,21 @@ package PSpringStudy.springStudy211217.service;
 import PSpringStudy.springStudy211217.domain.Member;
 import PSpringStudy.springStudy211217.reposipory.MemberRepository;
 import PSpringStudy.springStudy211217.reposipory.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
-@Service
+//@Service => 직접 컨테이너 설정하기 위해 주석처리
 public class MemberService {
-    private final static MemberRepository memberRepository = new MemoryMemberRepository();
+//    private final static MemberRepository memberRepository = new MemoryMemberRepository(); =
+      private MemberRepository memberRepository;
+
+      @Autowired //자동호출출
+     public MemberService(MemberRepository memberRepository) {
+          this.memberRepository = memberRepository;
+      }
     /**
      * 회원가입
      */

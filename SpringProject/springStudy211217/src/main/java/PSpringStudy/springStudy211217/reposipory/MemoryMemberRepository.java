@@ -4,7 +4,7 @@ import PSpringStudy.springStudy211217.domain.Member;
 
 import java.util.*;
 
-/*고객정보 메인 메모리 저장장소*/
+/*고객정보 메인 메모리 저장장소 인터페이스 구현 클래스*/
 public class MemoryMemberRepository implements MemberRepository{
 
     private static Map<Long, Member> store = new HashMap<>();
