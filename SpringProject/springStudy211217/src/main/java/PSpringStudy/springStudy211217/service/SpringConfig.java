@@ -19,7 +19,7 @@ public class SpringConfig {
     @Autowired
     public SpringConfig(DataSource dataSource) {
         this.dataSource = dataSource;
-    }
+    } //springDataSource 호출하여 설정
     @Bean //Bean 등록 => 아래 로직을 실행시 호출 : 사용자 서비스 생성
     public MemberService memberService() {
         return new MemberService(memberRepository());

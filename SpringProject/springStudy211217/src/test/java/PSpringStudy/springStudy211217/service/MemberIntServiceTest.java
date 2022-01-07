@@ -1,24 +1,26 @@
 package PSpringStudy.springStudy211217.service;
 
 import PSpringStudy.springStudy211217.domain.Member;
+import PSpringStudy.springStudy211217.reposipory.JdbcMemberRepository;
 import PSpringStudy.springStudy211217.reposipory.MemberRepository;
 import PSpringStudy.springStudy211217.reposipory.MemoryMemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertThrows; // 211223: Junit v5 추가
-import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.sql.DataSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+@SpringBootTest
+@Transactional
+public class MemberIntServiceTest {
+    @Autowired MemberService memberService;
+    @Autowired MemberRepository memberRepository;
 
-public class MemberServiceTest {
-    final MemberRepository memberRepository = new MemoryMemberRepository();
-    MemberService memberService = new MemberService(memberRepository);
 
-//    @AfterEach
-//    void mClear() {
-//        memberRepository.clearStore();
-//    }
     @Test
     void join() {
         Member testMember = new Member();
@@ -26,7 +28,7 @@ public class MemberServiceTest {
 
         Long joinId = memberService.join(testMember);
         Member checkJoiner = memberService.findOne(joinId).get(); //Optional<Member> (get()) => Member
-        assertThat(testMember).isEqualTo(checkJoiner);
+        assertThat(testMember.getName()).isEqualTo(checkJoiner.getName());
 
 
         /* 중복가입 요청 */
