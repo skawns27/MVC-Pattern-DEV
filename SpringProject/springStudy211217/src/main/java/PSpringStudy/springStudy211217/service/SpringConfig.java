@@ -1,6 +1,7 @@
 package PSpringStudy.springStudy211217.service;
 
 import PSpringStudy.springStudy211217.reposipory.JdbcMemberRepository;
+import PSpringStudy.springStudy211217.reposipory.JdbcTemplateMemberRepository;
 import PSpringStudy.springStudy211217.reposipory.MemberRepository;
 import PSpringStudy.springStudy211217.reposipory.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ public class SpringConfig {
     @Bean
     public MemberRepository memberRepository() {
 //        return new MemoryMemberRepository();
-        return new JdbcMemberRepository(dataSource); // jdbc레포지토리로 변경
+//        return new JdbcMemberRepository(dataSource); // jdbc레포지토리로 변경
+        return new JdbcTemplateMemberRepository(dataSource);
     }
 }
