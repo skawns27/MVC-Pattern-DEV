@@ -1,5 +1,6 @@
 package PSpringStudy.springStudy211217.service;
 
+import PSpringStudy.springStudy211217.domain.Member;
 import PSpringStudy.springStudy211217.reposipory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -14,13 +15,20 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig {
 //    private DataSource dataSource;
-    private EntityManager em;
+//    private EntityManager em;
+//
+//    @Autowired
+//    public SpringConfig(DataSource dataSource) {
+////        this.dataSource = dataSource;
+//        this.em = em;
+//    } //springDataSource 호출하여 설정
+    /* Jpa Data 사용*/
 
-    @Autowired
-    public SpringConfig(DataSource dataSource) {
-//        this.dataSource = dataSource;
-        this.em = em;
-    } //springDataSource 호출하여 설정
+    private final MemberRepository memberRepository;
+    @Autowired // 사실 생성자 1개면 생략가능
+    public SpringConfig(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository; // injection으로 주입받는 memberRepository 호출
+    }
     @Bean //Bean 등록 => 아래 로직을 실행시 호출 : 사용자 서비스 생성
     public MemberService memberService() {
         return new MemberService(memberRepository());
